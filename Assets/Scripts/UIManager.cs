@@ -24,7 +24,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float minCloseStayTime = 1f;
     
     [Header("참조")]
-
+    [SerializeField] private SoundManager soundManager;
+    
     private Action<bool> _backEffect;
     private Action Change;
     private Vector2 originPos;

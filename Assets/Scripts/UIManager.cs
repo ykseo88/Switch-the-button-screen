@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private float doorSpeed = 0.5f;
     [SerializeField] private float minCloseStayTime = 1f;
+    [SerializeField] private GameObject hammer;
     
     [Header("참조")]
     [SerializeField] private SoundManager soundManager;
@@ -56,7 +57,8 @@ public class UIManager : MonoBehaviour
         await DownDoor();
         await ChangePage(isToEnd);//화면 전환 대기
         await Task.Delay((int)minCloseStayTime*1000);//
-        door.transform.DOLocalMoveY(originPos.y, 1f *  doorSpeed);
+        await UpDoor();
+        hammer.SetActive(true);
     }
 
     private async Task ChangePage(bool isToEnd)
@@ -68,5 +70,10 @@ public class UIManager : MonoBehaviour
     private async Task DownDoor()
     {
         await door.transform.DOLocalMoveY(0, 1f * doorSpeed).AsyncWaitForCompletion();
+    }
+
+    private async Task UpDoor()
+    {
+        await door.transform.DOLocalMoveY(originPos.y, 1f * doorSpeed).AsyncWaitForCompletion();
     }
 }
